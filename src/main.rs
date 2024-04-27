@@ -9,25 +9,15 @@ use crate::templates::{DailyWeather, Render, WeatherPage};
 mod templates;
 
 fn main() {
-    let forecast: Vec<DailyWeather> = vec![
-        ("Monday", "Sunny").into(),
-        ("Tuesday", "Rainy").into(),
-        ("Wednesday", "Cloudy").into(),
-        ("Thursday", "Sunny").into(),
-        ("Friday", "Rainy").into(),
-        ("Saturday", "Cloud)y").into(),
-        ("Sunday", "Sunny").into(),
-    ];
-    let weather_page = WeatherPage::new(forecast);
-    let weekly_weather = weather_page.render();
-
-    println!("{}", weekly_weather);
+    println!("{}", render_weather_page());
 
     //simple html server to serve the html
     let listener = TcpListener::bind("127.0.0.1:8080").unwrap();
 
     println!("Listening on 127.0.0.1:8080");
 
+    //this is just for show, you need a proper on unless
+    //you are building a toy server, iot or testing
     for stream in listener.incoming() {
         let stream = stream.unwrap();
         handle_connection(stream);
@@ -68,4 +58,5 @@ fn handle_connection(mut stream: TcpStream) {
     stream.write_all(response.as_bytes()).unwrap();
     stream.flush().unwrap();
 }
+
 // let exp_template = format!(include_str!("./mytempl.txt"), message = message);
