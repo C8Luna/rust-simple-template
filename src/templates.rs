@@ -57,7 +57,7 @@ impl Render for DailyWeather {
 
     fn render(&self) -> String {
         format!(
-            r#"The weather on {dayofweek} {weather}"#,
+            r#"<li>The weather on {dayofweek} {weather}</li>"#,
             dayofweek = self.day,
             weather = self.weather
         )
@@ -74,6 +74,7 @@ impl WeatherPage {
 }
 impl Render for WeatherPage {
     fn render(&self) -> String {
-        html!("Weather Page", render_iter!(self.forecast))
+        let list = format!("<ul>{}</ul>", render_iter!(self.forecast));
+        html!("Weather Page", list)
     }
 }
