@@ -14,7 +14,10 @@ macro_rules! html {
                 <title>{}</title>
             </head>
             <body>
+                <header>
+                <h1>Forecast</h1>
                 {}
+                </header>
             </body>
             </html>
         "#,
